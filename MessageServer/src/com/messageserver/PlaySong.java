@@ -25,60 +25,11 @@ public class PlaySong {
     }
 
     public void doStuff() {
-        String music_path = "\\\\THEMOIST\\Feuchtgebiete\\Music";
-        files = new File(music_path).listFiles();
-        folders = getFolders();
-        artist_folders = matchArtist(artist);
-        song_files = getFiles();
-        song_file = getSong(song);
+        GetSong get_song = new GetSong(this.artist, this.song);
+        song_file = get_song.DoStuff();
         if (song_file != null) {
             play_it(song_file);
         }
-    }
-
-    private List<File> getFolders() {
-        List<File> results = new ArrayList<File>();
-        for (File file : files) {
-            if (file.isDirectory()) {
-                results.add(file);
-            }
-        }
-        System.out.println(results);
-        return results;
-    }
-
-    private List<File> getFiles() {
-        List<File> results = new ArrayList<File>();
-        for (File folder : artist_folders) {
-            for (File file : folder.listFiles()) {
-                if (file.isFile()) {
-                    results.add(file);
-                }
-            }
-        }
-        System.out.println(results);
-        return results;
-    }
-
-    private File getSong(String song){
-        for (File file : song_files) {
-            System.out.println(file.getName());
-            if (file.getName().contains(song) || file.getName().toLowerCase().contains(song)) {
-                return file;
-            }
-        }
-        System.out.println("Song not found");
-        return null;
-    }
-
-    private  List<File> matchArtist(String artist){
-        List<File> results = new ArrayList<File>();
-        for (File folder : folders) {
-            if (folder.getName().contains(artist) || folder.getName().toLowerCase().contains(artist)){
-                results.add(folder);
-            }
-        }
-        return results;
     }
 
     private void play_it(File song_file){
