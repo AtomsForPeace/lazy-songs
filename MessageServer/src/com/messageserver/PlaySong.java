@@ -18,14 +18,16 @@ public class PlaySong {
     File song_file;
     String artist;
     String song;
+    List<File> folderslist;
 
-    public PlaySong(String artist, String song){
+    public PlaySong(String artist, String song, List<File> folderslist){
         this.artist = artist;
         this.song = song;
+        this.folderslist = folderslist;
     }
 
     public void doStuff() {
-        GetSong get_song = new GetSong(this.artist, this.song);
+        GetSong get_song = new GetSong(this.artist, this.song, folderslist);
         song_file = get_song.DoStuff();
         if (song_file != null) {
             play_it(song_file);

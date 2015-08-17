@@ -10,37 +10,26 @@ import java.util.List;
 
 public class GetSong {
     File[] files;
-    List<File> folders;
+    List<File> folderslist;
     List<File> artist_folders;
     List<File> song_files;
     File song_file;
     String artist;
     String song;
 
-    public GetSong(String artist, String song) {
+    public GetSong(String artist, String song, List<File> folderslist) {
         this.artist = artist;
         this.song = song;
+        this.folderslist = folderslist;
     }
 
     public File DoStuff() {
         String music_path = "\\\\THEMOIST\\Feuchtgebiete\\Music";
         files = new File(music_path).listFiles();
-        folders = getFolders();
         artist_folders = matchArtist(artist);
         song_files = getFiles();
         song_file = getSong(song);
         return song_file;
-    }
-
-    private List<File> getFolders() {
-        List<File> results = new ArrayList<File>();
-        for (File file : files) {
-            if (file.isDirectory()) {
-                results.add(file);
-            }
-        }
-        System.out.println(results);
-        return results;
     }
 
     private List<File> getFiles() {
@@ -69,7 +58,7 @@ public class GetSong {
 
     private  List<File> matchArtist(String artist){
         List<File> results = new ArrayList<File>();
-        for (File folder : folders) {
+        for (File folder : folderslist) {
             if (folder.getName().contains(artist) || folder.getName().toLowerCase().contains(artist)){
                 results.add(folder);
             }

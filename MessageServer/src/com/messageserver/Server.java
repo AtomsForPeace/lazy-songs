@@ -1,15 +1,20 @@
 package com.messageserver;
 
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 
 /**
  * Created by Adam on 24/07/2015.
  */
 public class Server {
     public static void main(String[] args){
+        String music_path = "\\\\THEMOIST\\Feuchtgebiete\\Music";
+        GetFolders folders = new GetFolders(music_path);
+        final List<File> folderslist = folders.GetFoldersList();
         Thread t = new Thread(){
 
             @Override
@@ -23,7 +28,7 @@ public class Server {
                         String inputs = dis.readUTF();
                         System.out.println("Received: " + inputs);
                         InputParser parse_them = new InputParser();
-                        parse_them.take_input(inputs);
+                        parse_them.take_input(inputs, folderslist);
                         dis.close();
                         s.close();
                     }
