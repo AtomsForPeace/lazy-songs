@@ -38,7 +38,7 @@ public class PlaySong {
         String path = song_file.getAbsolutePath();
         Runtime rt = Runtime.getRuntime();
         try {
-            rt.exec("C:\\Program Files\\VideoLAN\\VLC\\vlc " + "\"" + path + "\"");
+            rt.exec(new String[] {"vlc", "--playlist-enqueue", "--one-instance", "--one-instance-when-started-from-file", "-Z", "-L", "\"", path, "\"" });
         } catch (IOException e) {
             e.printStackTrace();
         }

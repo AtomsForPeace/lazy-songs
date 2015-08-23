@@ -33,7 +33,7 @@ public class Client extends Activity implements View.OnClickListener {
             @Override
             public void run() {
                 try {
-                    Socket s = new Socket("192.168.2.105", 7000);
+                    Socket s = new Socket("192.168.2.103", 7000);
                     DataOutputStream dos = new DataOutputStream(s.getOutputStream());
                     dos.writeUTF(etMessage.getText().toString());
                     dos.flush();
